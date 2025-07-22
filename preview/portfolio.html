@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Personal Portfolio</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		body {
+			background: linear-gradient(to bottom right, #141e30, #243b55);
+			color: #f0f0f0;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 40px 20px;
+		}
+
+		.card {
+			width: 80%;
+			height: auto;
+			background: #07182E;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			overflow: hidden;
+			border-radius: 20px;
+		}
+
+		.card::before {
+			content: '';
+			position: absolute;
+			width: 250px;
+			height: 250%;
+			top: -75%;
+			left: calc(50% - 125px);
+			background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+			animation: rotBGimg 5s linear infinite;
+			filter: blur(20px);
+		}
+
+		@keyframes rotBGimg {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		.card::after {
+			content: '';
+			position: absolute;
+			background: #07182E;
+			inset: 5px;
+			border-radius: 15px;
+		}
+
+		.card-inner {
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			overflow-y: auto;
+			padding: 30px 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: flex-start;
+		}
+
+		.profile-section {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			text-align: left;
+			background-color: rgba(0, 0, 0, 0.2);
+			padding: 15px 20px;
+			border-radius: 15px;
+			box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+			margin-bottom: 30px;
+			backdrop-filter: blur(4px);
+		}
+
+		.profile-pic {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			border: 4px solid #00f0ff;
+			object-fit: cover;
+			box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+		}
+
+		.profile-info {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			max-width: 400px;
+		}
+
+		.profile-info h1 {
+			font-size: 24px;
+			margin-bottom: 5px;
+		}
+
+		.profile-info h2 {
+			font-size: 16px;
+			color: var(--text-secondary);
+			margin-bottom: 10px;
+		}
+
+
+		.profile-info .bio {
+			font-size: 14px;
+			margin-bottom: 8px;
+		}
+
+		.links {
+			font-size: 14px;
+		}
+
+		.links a {
+			color: #0ff;
+			text-decoration: none;
+			margin: 0 4px;
+		}
+
+		.flex-grid {
+			display: flex;
+			gap: 40px;
+			margin-top: 20px;
+			width: 100%;
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+
+		.projects,
+		.skills {
+			width: 300px;
+			background: rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			border-radius: 10px;
+		}
+
+		.projects h3,
+		.skills h3 {
+			margin-bottom: 10px;
+			border-bottom: 1px solid #0ff;
+			padding-bottom: 5px;
+		}
+
+		.projects ul,
+		.skills ul {
+			list-style: none;
+			padding-left: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		.projects li,
+		.skills li {
+			background: #00f0ff33;
+			padding: 8px 12px;
+			border-radius: 8px;
+			color: #fff;
+		}
+
+		.contact-form {
+			margin-top: 30px;
+			width: 100%;
+			max-width: 500px;
+			background: rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			border-radius: 10px;
+		}
+
+		.contact-form h3 {
+			margin-bottom: 10px;
+			text-align: center;
+		}
+
+		.contact-form input,
+		.contact-form textarea {
+			width: 100%;
+			margin-bottom: 10px;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			background: #1c2b3a;
+			color: #fff;
+		}
+		.contact-form textarea {
+			resize: vertical;
+		}
+
+		.contact-form button {
+			width: 100%;
+			padding: 10px;
+			background: #00f0ff;
+			border: none;
+			border-radius: 5px;
+			color: #000;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		.main-content {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="card">
+		<div class="card-inner">
+
+			<div class="profile-section">
+				<img src="../images/portfolio/blank-profile-picture.png" alt="Profile Picture" class="profile-pic" />
+				<div class="profile-info">
+					<h1 id="fullName">[NAME]</h1>
+					<h2 id="role">[ROLE]</h2>
+					<p class="bio" id="bio">[BIO]</p>
+					<div class="links">
+						<a href="example.com" id="websiteLink">Website</a> |
+						<a href="mailtoyou@example.com" id="email">Email</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="main-content">
+				<div class="flex-grid">
+					<div class="projects">
+						<h3>Projects</h3>
+						<ul id="projectsList">
+							<li>None</li>
+						</ul>
+					</div>
+
+					<div class="skills">
+						<h3>Skills</h3>
+						<ul id="skillsList">
+							<li>None</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="contact-form">
+					<h3>Contact Me</h3>
+					<form>
+						<input type="text" placeholder="Your Name" />
+						<input type="email" placeholder="Your Email" />
+						<textarea placeholder="Your Message"></textarea>
+						<button type="submit">Send</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		window.onload = function () {
+			const data = JSON.parse(localStorage.getItem("preview_data_Personal-Portfolios") || "{}");
+
+			// Set profile section values
+			document.getElementById("fullName").textContent = data.personName || "[NAME]";
+			document.getElementById("role").textContent = data.role || "[ROLE]";
+			document.getElementById("bio").textContent = data.about || "[BIO]";
+
+			// Set website + email links
+			const websiteLink = document.getElementById("websiteLink");
+			if (data.website) {
+				websiteLink.href = data.website;
+				websiteLink.textContent = "🌐 Website";
+			} else {
+				websiteLink.remove();
+			}
+
+			const emailLink = document.getElementById("email");
+			if (data.siteContact) {
+				emailLink.href = "mailto:" + data.siteContact;
+				emailLink.textContent = "Email";
+			} else {
+				emailLink.remove();
+			}
+
+			// Projects list
+			const projectsList = document.getElementById("projectsList");
+			if (data.projects && Array.isArray(data.projects)) {
+				projectsList.innerHTML = "";
+				data.projects.forEach((project) => {
+					const li = document.createElement("li");
+					li.textContent = project;
+					projectsList.appendChild(li);
+				});
+			}
+
+			// Skills list
+			const skillsList = document.getElementById("skillsList");
+			if (data.skills && Array.isArray(data.skills)) {
+				skillsList.innerHTML = "";
+				data.skills.forEach((skill) => {
+					const li = document.createElement("li");
+					li.textContent = skill;
+					skillsList.appendChild(li);
+				});
+			}
+
+			if (data.siteLogo) {
+			  document.querySelector(".profile-pic").src = data.siteLogo;
+			}
+			if (data.bgColor || data.accentColor || data.themeMode) {
+				const rootStyle = document.createElement("style");
+
+				let bgColor = data.bgColor;
+				if (!bgColor || !/^#([0-9A-F]{3}){1,2}$/i.test(bgColor)) {
+				bgColor = "#141e30";
+				}
+				const bgGradient = `linear-gradient(to bottom right, ${bgColor}, #6ec7ff)`;
+
+				let accent = data.accentColor;
+				if (accent && accent != "") {
+					accent = accent
+				}
+				if (!accent || !/^#([0-9A-F]{3}){1,2}$/i.test(accent)) {
+					accent  = "#00f0ff"
+				}
+				if (accent === "") {
+					accent  = "#00f0ff"
+				}
+				const mode = data.themeMode || "dark";
+				const secondaryTextColor = mode === "light" ? "#555" : "#aaa";
+
+				let textColor = mode === "light" ? "#000" : "#f0f0f0";
+				const blockBg = mode === "light" ? "#f0f0f0cc" : "rgba(0, 0, 0, 0.1)";
+				const inputBg = mode === "light" ? "#ffffff" : "#1c2b3a";
+
+				rootStyle.innerHTML = `
+					body {
+						background: ${bgGradient}
+						color: ${textColor};
+					}
+					.card {
+						background: ${mode === "light" ? "#ffffffcc" : "#07182E"};
+						color: ${textColor};
+					}
+					.profile-info h2 {
+						color: ${secondaryTextColor};
+					}
+					.card::after {
+						content: '';
+						position: absolute;
+						background: inherit;
+						inset: 5px;
+						border-radius: 15px;
+					}
+					.card::before {
+						content: '';
+						position: absolute;
+						width: 250px;
+						height: 250%;
+						top: -75%;
+						left: calc(50% - 125px);
+						background-image: linear-gradient(180deg, ${accent}, ${accent});
+						animation: rotBGimg 5s linear infinite;
+						filter: blur(20px);
+					}
+					.profile-pic {
+						border-color: ${accent};
+						box-shadow: 0 0 15px ${accent}88;
+					}
+					.projects h3, .skills h3 {
+						border-bottom: 1px solid ${accent};
+					}
+					.projects li, .skills li {
+						background: ${accent}33;
+						color: ${textColor};
+					}
+					.contact-form, .projects, .skills {
+						background: ${blockBg};
+					}
+					.contact-form input, .contact-form textarea {
+						background: ${inputBg};
+						color: ${textColor};
+					}
+					.contact-form textarea {
+						resize: vertical;
+					}
+					.contact-form button {
+						background: ${accent};
+						color: ${mode === "light" ? "#000" : "#000"};
+					}
+				`;
+				document.head.appendChild(rootStyle);
+			}
+		};
+	</script>
+</body>
+
+</html>

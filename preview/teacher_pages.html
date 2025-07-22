@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Classroom Preview</title>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+		<style>
+			* {
+				box-sizing: border-box;
+				font-family: 'Poppins', sans-serif;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				background: white;
+				min-height: 100vh;
+				color: #fff;
+				display: flex;
+			}
+
+			aside {
+				width: 250px;
+				background: linear-gradient(to bottom, rgb(0, 123, 255), rgb(140, 229, 255));
+				backdrop-filter: blur(10px);
+				padding: 30px 20px;
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+				border-top-right-radius: 24px;
+				border-bottom-right-radius: 24px;
+			}
+
+
+			aside h1 {
+				font-size: 22px;
+				color: #fff;
+				margin-bottom: 30px;
+			}
+
+			aside button {
+				background: none;
+				border: none;
+				color: #fff;
+				font-size: 16px;
+				text-align: left;
+				padding: 10px 15px;
+				cursor: pointer;
+				border-radius: 8px;
+				transition: background 0.3s;
+			}
+
+			aside button:hover,
+			aside button.active {
+				background-color: #ffffff22;
+			}
+
+			main {
+				flex: 1;
+				padding: 40px;
+			}
+
+			section {
+				display: none;
+				background: linear-gradient(to bottom right, #007bff, #6ec7ff);
+				padding: 30px;
+				border-radius: 16px;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+				margin-bottom: 30px;
+			}
+
+			section.active {
+				display: block;
+			}
+
+			h2 {
+				margin-bottom: 15px;
+				color: #f0f8ff;
+			}
+
+			p {
+				font-size: 18px;
+				color: #eef;
+			}
+
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 250px;
+				width: calc(100% - 250px);
+				background: linear-gradient(to right, rgb(0, 123, 255), rgb(140, 229, 255));
+				text-align: center;
+				padding: 15px;
+				font-size: 14px;
+				color: white;
+				border-top-left-radius: 36px;
+				border-top-right-radius: 36px;
+			}
+
+			.button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 15px 30px;
+				border: 0;
+				position: relative;
+				overflow: hidden;
+				border-radius: 10rem;
+				transition: all 0.02s;
+				font-weight: bold;
+				cursor: pointer;
+				color: rgb(37, 37, 37);
+				z-index: 0;
+				box-shadow: 0 0px 7px -5px rgba(0, 0, 0, 0.5);
+			}
+
+			.button:hover {
+				background: rgb(193, 228, 248);
+				color: rgb(33, 0, 85);
+			}
+
+			.button:active {
+				transform: scale(0.97);
+			}
+
+			.hoverEffect {
+				position: absolute;
+				bottom: 0;
+				top: 0;
+				left: 0;
+				right: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 1;
+			}
+
+			.hoverEffect div {
+				background: rgb(222, 0, 75);
+				background: linear-gradient(90deg,
+						rgba(222, 0, 75, 1) 0%,
+						rgba(191, 70, 255, 1) 49%,
+						rgba(0, 212, 255, 1) 100%);
+				border-radius: 40rem;
+				width: 10rem;
+				height: 10rem;
+				transition: 0.4s;
+				filter: blur(20px);
+				animation: effect infinite 3s linear;
+				opacity: 0.5;
+			}
+
+			.button:hover .hoverEffect div {
+				width: 8rem;
+				height: 8rem;
+			}
+
+			@keyframes effect {
+				0% {
+					transform: rotate(0deg);
+				}
+
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+
+		<aside>
+			<h1 id="siteName">My Website</h1>
+			<button class="active" onclick="showSection('home')">Class Info</button>
+			<button onclick="showSection('homework')">Homework</button>
+			<button onclick="showSection('students')">Students</button>
+			<button onclick="showSection('contact')">Contact</button>
+		</aside>
+
+		<main>
+			<section id="home" class="active">
+				<h2>Class Info</h2>
+				<p><strong>Class:</strong> <span id="previewClass">[Class]</span></p>
+				<p><strong>Division:</strong> <span id="previewDivision">[Division]</span></p>
+				<p><strong>Class Teacher:</strong> <span id="previewTeacher">[Teacher]</span></p>
+				<p id="previewDescription">This class is awesome!</p>
+			</section>
+
+			<section id="homework">
+				<h2>Homework</h2>
+				<p>Nothing here yet! Add your homework soon.</p>
+			</section>
+
+			<section id="students">
+				<h2>Students</h2>
+				<div style="display: flex; align-items: center; justify-content: space-between;">
+					<p id="studentList">No students listed yet.</p>
+					<button class="button" onclick="addStudent()">
+						<strong><b>✚</b></strong>
+						<div class="hoverEffect">
+							<div></div>
+						</div>
+					</button>
+				</div>
+			</section>
+
+			<section id="contact">
+				<h2>Contact</h2>
+				<p>Name: <span id="previewTeacherName"></span></p>
+				<p>Email: <span id="previewContact">you@example.com</span></p>
+			</section>
+		</main>
+
+		<footer>
+			Powered by BrightByte 🚀
+		</footer>
+
+		<script>
+			const data = JSON.parse(localStorage.getItem("preview_data_Teacher-Pages"));
+
+			if (data) {
+				document.getElementById("siteName").textContent = data.siteName || "Class";
+				document.getElementById("previewDescription").textContent = data.classInfo || "No description provided.";
+				document.getElementById("previewContact").textContent = data.siteContact || "No contact email.";
+				document.getElementById("studentList").textContent = data.members || "No members listed.";
+				document.getElementById("previewClass").textContent = data.className || "Not specified";
+				document.getElementById("previewDivision").textContent = data.division || "Not specified";
+				document.getElementById("previewTeacher").textContent = data.classTeacher || "Not specified";
+				document.getElementById("previewTeacherName").textContent = data.teacherName || "Not specified";
+			}
+			let studentArray = [];
+
+			function addStudent() {
+				const name = prompt("Enter student name:");
+				if (!name || !name.trim()) return;
+
+				studentArray.push(name.trim());
+				updateStudentList();
+			}
+
+			function updateStudentList() {
+				const studentList = document.getElementById("studentList");
+				if (studentArray.length === 0) {
+					studentList.textContent = "No students listed yet.";
+				} else {
+					studentList.innerHTML = "<ul style='padding-left: 20px;'>";
+					studentArray.forEach(student => {
+						studentList.innerHTML += `<li style="color: #eef; font-size: 17px;">${student}</li>`;
+					});
+					studentList.innerHTML += "</ul>";
+				}
+			}
+
+			// Initialize with saved list
+			if (data && data.members) {
+				studentArray = data.members.split(",").map(s => s.trim()).filter(Boolean);
+				updateStudentList();
+			}
+
+			function showSection(id) {
+				document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+				document.getElementById(id).classList.add("active");
+
+				document.querySelectorAll("aside button").forEach(btn => btn.classList.remove("active"));
+				event.target.classList.add("active");
+			}
+		</script>
+
+	</body>
+</html>

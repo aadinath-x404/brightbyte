@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BrightByte helps students make websites that shine.">
+  <title>BrightByte - Student Digital Agency</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">BrightByte</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <h1>We Build Websites That Shine Bright</h1>
+    <p>By students. For students. For everyone.</p>
+    <a href="#services" class="btn">Explore Our Services</a>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About BrightByte</h2>
+    <p>We're a group of passionate students who love designing and coding websites. Our goal is to help classmates, clubs, and teachers get online with style!</p>
+  </section>
+
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="content">
+          <h3>Club Websites</h3>
+          <p class="para">We design fun, functional websites for school clubs and events.</p>
+          <button class="btn" onclick="requestService('Club Websites')">Learn More</button>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="content">
+          <h3>Personal Portfolios</h3>
+          <p class="para">Want to show off your projects? We'll help you create your very own site.</p>
+          <button class="btn" onclick="requestService('Personal Portfolios')">Learn More</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <h3>Teacher Pages</h3>
+          <p class="para">We help teachers build simple pages to connect with students & parents.</p>
+          <button class="btn" onclick="requestService('Teacher Pages')">Learn More</button>
+        </div>
+      </div>
+      
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form onsubmit="return handleSubmit(event)">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>      
+      <textarea id="messageBox" name="message" placeholder="Your Message"></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 BrightByte. Made with 💙 by students.</p>
+  </footer>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert("Thanks for reaching out! We'll get back to you soon.");
+      return false;
+    }
+
+    function requestService(serviceName) {
+      const url = `service.html?service=${encodeURIComponent(serviceName)}`;
+      window.location.href = url;
+    }
+  </script>
+
+</body>
+</html>

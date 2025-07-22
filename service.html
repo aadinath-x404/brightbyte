@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Info - BrightByte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> 
+
+  <style>
+    .service-body {
+      font-family: 'Poppins', sans-serif, system-ui !important;
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, #0059ff, rgb(110, 199, 255));
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      color: #333;
+      padding: 0;
+    }
+
+    .service-body *{
+      font-family: 'Poppins', sans-serif, system-ui !important;
+    }
+
+    .service-container {
+      max-width: 900px;
+      margin: 70px auto;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+      text-align: center;
+    }
+
+    .service-container h1 {
+      font-size: 36px;
+      font-weight: 800;
+      color: #f0f8ff;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .service-container p {
+      font-size: 20px;
+      line-height: 1.8;
+      font-weight: 500;
+      color: #f0f8ff;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+    }
+    
+    .service-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: #f0f8ff;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    
+    .back-link:hover {
+      color: #0059ff;
+      text-shadow: 0 0 8px #fff200;
+    }
+  </style>
+</head>
+<body class="service-body">
+  <div class="service-container">
+    <h1 id="service-title">Loading...</h1>
+    <p id="service-description">Please wait while we fetch your service info.</p>
+    <br>
+    <div class="service-actions">
+      <a href="index.html" class="back-link">← Back to Homepage</a>
+      <a id="start-btn" class="btn">Start Building →</a>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const service = urlParams.get('service');
+
+    const title = document.getElementById('service-title');
+    const desc = document.getElementById('service-description');
+
+    const services = {
+      "Club Websites": "We design eye-catching, easy-to-manage websites for your school clubs and events. Share updates, showcase photos, display member profiles, and even post event calendars! It’s your club’s digital HQ — made simple.",
+      "Personal Portfolios": "Whether you’re a coder, artist, gamer, or aspiring astronaut — we help you build a stunning online portfolio that highlights your skills, achievements, projects, and passions. Great for competitions, scholarships, or just showing the world who you are.",
+      "Teacher Pages": "A central space where teachers can share class schedules, homework updates, announcements, and contact info. Designed to be clean, secure, and easy to use — keeping students and parents always in the loop."
+    };
+
+    if (services[service]) {
+      title.textContent = service;
+      desc.textContent = services[service];
+    } else {
+      title.textContent = "Unknown Service";
+      desc.textContent = "We couldn’t find info on that service.";
+    }
+
+    const startBtn = document.getElementById("start-btn");
+    if (service) {
+      startBtn.href = `build.html?service=${encodeURIComponent(service)}`;
+    } else {
+      startBtn.style.display = "none";
+    }
+  </script>
+</body>
+</html>

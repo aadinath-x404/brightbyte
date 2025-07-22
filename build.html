@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Start Building</title>
+	<link rel="stylesheet" href="style.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			font-family: 'Poppins', sans-serif;
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			background: linear-gradient(to bottom right, #0059ff, #6ec7ff);
+			background-attachment: fixed;
+			background-size: cover;
+			color: #333;
+		}
+
+		.form-container {
+			max-width: 900px;
+			margin: 70px auto;
+			background: rgba(255, 255, 255, 0.25);
+			backdrop-filter: blur(8px);
+			padding: 40px;
+			border-radius: 16px;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		}
+
+		label {
+			display: block;
+			margin: 15px 0 5px;
+			color: #f0f8ff;
+		}
+
+		input,
+		textarea {
+			width: 100%;
+			padding: 10px;
+			border-radius: 8px;
+			border: none;
+			font-size: 16px;
+		}
+		textarea {
+			resize: vertical;
+		}
+
+		button.btn {
+			margin-top: 20px;
+			padding: 10px 20px;
+			font-size: 16px;
+			border: none;
+			border-radius: 12px;
+			background-color: #007bff;
+			color: white;
+			cursor: pointer;
+		}
+
+		button.btn:hover {
+			background-color: #0056cc;
+		}
+
+		.custum-file-upload {
+			height: 200px;
+			width: 300px;
+			display: flex;
+			flex-direction: column;
+			align-items: space-between;
+			gap: 20px;
+			cursor: pointer;
+			align-items: center;
+			justify-content: center;
+			border: 2px dashed #cacaca;
+			background-color: rgba(255, 255, 255, 1);
+			padding: 1.5rem;
+			border-radius: 10px;
+			box-shadow: 0px 48px 35px -48px rgba(0, 0, 0, 0.1);
+		}
+
+		.custum-file-upload .icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.custum-file-upload .icon svg {
+			height: 80px;
+			fill: rgba(75, 85, 99, 1);
+		}
+
+		.custum-file-upload .text {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.custum-file-upload .text span {
+			font-weight: 400;
+			color: rgba(75, 85, 99, 1);
+		}
+
+		.custum-file-upload input {
+			display: none;
+		}
+
+		input[type="color"] {
+			appearance: none;
+			-webkit-appearance: none;
+			border: none;
+			width: 64px;
+			height: 64px;
+			background-color: transparent;
+			cursor: pointer;
+		}
+
+		input[type="color"]::-webkit-color-swatch-wrapper {
+			padding: 0;
+		}
+
+		input[type="color"]::-webkit-color-swatch {
+			border-radius: 50%;
+			border: none;
+			background-color: red;
+		}
+
+		select {
+			appearance: none;
+			/* Removes default browser styling */
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 10px 40px 10px 10px;
+			font-size: 16px;
+			background-color: #f9f9f9;
+			color: #333;
+			width: 100%;
+			box-sizing: border-box;
+			cursor: pointer;
+			transition: border-color 0.3s, box-shadow 0.3s;
+		}
+
+		select:hover {
+			border-color: #888;
+		}
+
+		select:focus {
+			border-color: #555;
+			box-shadow: 0 0 5px rgba(85, 85, 85, 0.5);
+			outline: none;
+		}
+
+		option {
+			background-color: #fff;
+			color: #333;
+			font-family: 'Poppins', sans-serif;
+			font-size: 14px;
+		}
+
+		option:before {
+			content: "";
+			display: none;
+		}
+
+		option:hover:before {
+			display: inline;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="form-container">
+		<h2 id="builder-title">Let’s Start Building Your Website 🛠️</h2>
+		<div id="form-area"></div>
+	</div>
+
+	<script>
+		const params = new URLSearchParams(window.location.search);
+		const service = params.get('service');
+
+		let forms_service;
+		if (service === "Club Websites") {
+			forms_service = "Club";
+		} else if (service === "Personal Portfolios") {
+			forms_service = "Personal-Portfolios";
+		} else if (service === "Teacher Pages") {
+			forms_service = "Teacher-Pages";
+		}
+
+		document.getElementById("builder-title").textContent = `Let's Build Your ${service || "Custom"} Website 🚀`;
+
+		const formArea = document.getElementById("form-area");
+
+		const forms = {
+			"Club": `
+				<label>Club Name: <input type="text" id="clubName"></label>
+				<label>Site Title: <input type="text" id="siteName"></label>
+				<label>Upload Logo:
+					<label class="custum-file-upload" for="siteLogo">
+					<div class="icon">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path> </g></svg>
+					</div>
+					<div class="text">
+						<span>Click to upload image</span>
+					</div>
+					<input type="file" accept="image/*" id="siteLogo">
+					</label>
+				</label>
+				<img id="logoPreview" src="" alt="Preview" style="max-height: 120px; margin-top: 10px; display: none; border-radius: 10px;" />
+
+				<label>Club Description:<textarea id="clubDescription"></textarea></label>
+				<label>Club Leader: <input type="text" id="clubLeader"></label>
+				<label>Members (comma separated):<textarea id="members"></textarea></label>
+				<label>Contact Email: <input type="email" id="siteContact"></label>
+				<button onclick="saveAndRedirect()" class="btn">Generate Website 🚀</button>
+			`,
+
+			"Personal-Portfolios": `
+				<label for="personName">Your Name:</label>
+				<input type="text" id="personName">
+
+				<label for="siteLogo">Upload Profile Picture:</label>
+					<label class="custum-file-upload" for="siteLogo">
+					<div class="icon">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path> </g></svg>
+					</div>
+					<div class="text">
+						<span>Click to upload image</span>
+					</div>
+					<input type="file" accept="image/*" id="siteLogo">
+					</label>
+				</label>
+				<img id="logoPreview" src="" alt="Preview" style="max-height: 120px; margin-top: 10px; display: none; border-radius: 10px;" />
+
+				<label for="siteName">Portfolio Site Name:</label>
+				<input type="text" id="siteName">
+
+				<label for="about">About You (Short Bio):</label>
+				<textarea id="about"></textarea>
+
+				<label for="role">Your Role (e.g., Developer / Student):</label>
+				<input type="text" id="role">
+
+				<label for="website">Your Website Link:</label>
+				<input type="text" id="website">
+
+				<h3 style="color: white;">Customize Theme</h3>
+
+				<label for="bgColor">Background Color:</label>
+				<input type="color" id="bgColor" value="#141e30" />
+
+				<label for="accentColor">Accent Color:</label>
+				<input type="color" id="accentColor" value="#00f0ff" />
+
+				<label for="themeMode">Theme Style:</label>
+				<select id="themeMode">
+				<option value="dark">Dark</option>
+				<option value="light">Light</option>
+				</select>
+
+				<label for="projects">Projects (comma-separated):</label>
+				<textarea id="projects"></textarea>
+
+				<label for="skills">Skills (comma-separated):</label>
+				<textarea id="skills"></textarea>
+
+				<label for="siteContact">Contact Email:</label>
+				<input type="email" id="siteContact">
+
+				<button onclick="saveAndRedirect()" class="btn">Generate Website 🚀</button>
+			`,
+
+			"Teacher-Pages": `
+				<label for="teacherName">Teacher Name:</label>
+				<input type="text" id="teacherName">
+
+				<label for="siteName">Class Site Name:</label>
+				<input type="text" id="siteName">
+
+				<label for="className">Class:</label>
+				<input type="text" id="className">
+
+				<label for="division">Division:</label>
+				<input type="text" id="division">
+
+				<label for="classTeacher">Class Teacher:</label>
+				<input type="text" id="classTeacher">
+
+				<label for="classInfo">Additional Info:</label>
+				<textarea id="classInfo"></textarea>
+
+				<label for="siteContact">Contact Email:</label>
+				<input type="email" id="siteContact">
+
+				<button onclick="saveAndRedirect()" class="btn">Generate Website 🚀</button>
+			`
+		};
+
+		formArea.innerHTML = forms[forms_service] || "<p>Service not found.</p>";
+
+		setTimeout(() => {
+			const fileInput = document.getElementById("siteLogo");
+			const previewImg = document.getElementById("logoPreview");
+
+			if (fileInput && previewImg) {
+				fileInput.addEventListener("change", () => {
+					const file = fileInput.files[0];
+					if (file) {
+						const reader = new FileReader();
+						reader.onload = function (e) {
+							previewImg.src = e.target.result;
+							previewImg.style.display = "block";
+						};
+						reader.readAsDataURL(file);
+					}
+				});
+			}
+		}, 100);
+
+		function saveAndRedirect() {
+			const data = {};
+			const inputs = document.querySelectorAll("input, textarea");
+
+			let allFilled = true;
+			let logoFile = null;
+
+			inputs.forEach((input) => {
+				if (input.type === "file" && input.id === "siteLogo") {
+					logoFile = input.files[0];
+				} else if (input.id === "themeColor") {
+					data[input.id] = input.value;
+				} else {
+					if (!input.value.trim()) allFilled = false;
+					let value = input.value.trim();
+					if (input.id === "projects" || input.id === "skills") {
+						data[input.id] = value.split(",").map(item => item.trim()).filter(Boolean);
+					} else {
+						data[input.id] = value;
+					}
+				}
+			});
+			if (forms_service === "Personal-Portfolios") {
+				const bgValue = document.getElementById("bgColor").value;
+				const accentValue = document.getElementById("accentColor").value;
+				const themeModeValue = document.getElementById("themeMode").value;
+				if (bgValue) data.bgColor = bgValue;
+				if (accentValue) data.accentColor = accentValue;
+				if (themeModeValue) data.themeMode = themeModeValue;
+			}
+
+			if (logoFile) {
+				const reader = new FileReader();
+				reader.onload = function (e) {
+					data.siteLogo = e.target.result;
+					finalizeRedirect(data);
+				};
+				reader.readAsDataURL(logoFile);
+			} else {
+				data.siteLogo = null;
+				finalizeRedirect(data);
+			}
+		}
+
+		function finalizeRedirect(data) {
+			localStorage.setItem(`preview_data_${forms_service}`, JSON.stringify(data));
+			localStorage.setItem("site_type", forms_service);
+			if (forms_service === "Club") {
+				window.open(`preview/club.html`, "_blank");
+			} else if (forms_service === "Teacher-Pages") {
+				window.open(`preview/teacher_pages.html`, "_blank");
+			} else if (forms_service === "Personal-Portfolios") {
+				window.open(`preview/portfolio.html`, "_blank")
+			}
+		}
+	</script>
+</body>
+
+</html>

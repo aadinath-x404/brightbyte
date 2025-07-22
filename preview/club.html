@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Club Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(to bottom right, #4e54c8, #8f94fb);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        aside {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        aside h1 {
+            font-size: 22px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        aside button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            text-align: left;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        aside button:hover,
+        aside button.active {
+            background-color: #ffffff22;
+        }
+
+        main {
+            flex: 1;
+            padding: 40px;
+        }
+
+        section {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #f0f8ff;
+        }
+
+        p {
+            font-size: 18px;
+            color: #eef;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 250px;
+            width: calc(100% - 250px);
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border: 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10rem;
+            transition: all 0.02s;
+            font-weight: bold;
+            cursor: pointer;
+            color: rgb(37, 37, 37);
+            z-index: 0;
+            box-shadow: 0 0px 7px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .button:hover {
+            background: rgb(193, 228, 248);
+            color: rgb(33, 0, 85);
+        }
+
+        .button:active {
+            transform: scale(0.97);
+        }
+
+        .hoverEffect {
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .hoverEffect div {
+            background: linear-gradient(90deg, rgba(222, 0, 75, 1) 0%, rgba(191, 70, 255, 1) 49%, rgba(0, 212, 255, 1) 100%);
+            border-radius: 40rem;
+            width: 10rem;
+            height: 10rem;
+            transition: 0.4s;
+            filter: blur(20px);
+            animation: effect infinite 3s linear;
+            opacity: 0.5;
+        }
+
+        .button:hover .hoverEffect div {
+            width: 8rem;
+            height: 8rem;
+        }
+
+        @keyframes effect {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes popFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside>
+        <img id="logoImage" src="" alt="Club Logo" style="
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin: 0 auto 20px;
+                display: none;
+                border: 4px solid #fff;
+                box-shadow: 0 0 12px rgba(0,0,0,0.3);
+            " />
+
+        <h1 id="clubName">🎉 Club</h1>
+        <button class="active" onclick="showSection('overview')">Overview</button>
+        <button onclick="showSection('members')">Members</button>
+        <button onclick="showSection('contact')">Contact</button>
+        <button onclick="showSection('chat')">Chat</button>
+
+    </aside>
+
+    <main>
+        <section id="overview" class="active">
+            <h2>Club Overview</h2>
+            <p><strong>Club Title:</strong> <span id="name">[Club Title]</span></p>
+            <p><strong>Club Leader:</strong> <span id="clubLeader">[Leader]</span></p>
+            <p id="clubDescription">Awesome club description goes here.</p>
+        </section>
+
+        <section id="members">
+            <h2>Members</h2>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <p id="memberList">No members listed yet.</p>
+                <button class="button" onclick="addMember()">
+                    <strong><b>✚</b></strong>
+                    <div class="hoverEffect">
+                        <div></div>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Name: <span id="clubLeaderName">[Leader]</span></p>
+            <p>Email: <span id="siteContact">you@example.com</span></p>
+        </section>
+        <section id="chat">
+            <h2>Club Chat</h2>
+            <div id="chatBox" style="
+                    background: rgba(255,255,255,0.1);
+                    height: 300px;
+                    overflow-y: auto;
+                    padding: 15px;
+                    border-radius: 12px;
+                    margin-bottom: 15px;
+                    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+                "></div>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="chatInput" placeholder="Type your message..." style="
+                        flex: 1;
+                        padding: 10px;
+                        border-radius: 8px;
+                        border: none;
+                        font-size: 16px;
+                    " />
+                <button onclick="sendMessage()" style="
+                        background-color: #00bbd4;
+                        border: none;
+                        color: white;
+                        padding: 10px 16px;
+                        font-size: 16px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                    ">➤</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        Powered by BrightByte 🌟
+    </footer>
+
+    <script>
+        let username = "";
+        let data = null;
+        let memberArray = [];
+        let popupCallback = null;
+        let isAlert = false;
+
+        window.onload = () => {
+            setTimeout(() => {
+                askUsername();
+            }, 50);
+
+            data = JSON.parse(localStorage.getItem("preview_data_Club"));
+            memberArray = [];
+
+            if (data) {
+                document.getElementById("clubName").textContent = data.clubName || "Unnamed Club";
+                document.getElementById("name").textContent = data.clubName || "No name";
+                document.getElementById("clubLeader").textContent = data.clubLeader || "Not specified";
+                document.getElementById("clubLeaderName").textContent = data.clubLeader || "Not specified";
+                document.getElementById("clubDescription").textContent = data.clubDescription || "No description provided.";
+                document.getElementById("siteContact").textContent = data.siteContact || "No email provided.";
+
+                if (data.members) {
+                    memberArray = data.members.split(",").map(s => s.trim()).filter(Boolean);
+                }
+
+                // 👑 Auto-include Club Leader
+                if (data.clubLeader) {
+                    const leaderName = data.clubLeader.trim();
+                    const lowerMembers = memberArray.map(m => m.toLowerCase());
+
+                    if (!lowerMembers.includes(leaderName.toLowerCase())) {
+                        memberArray.unshift(leaderName);
+                    }
+                }
+
+                updateMemberList();
+
+                if (data.siteLogo) {
+                    const logo = document.getElementById("logoImage");
+                    logo.src = data.siteLogo;
+                    logo.style.display = "block";
+                }
+            }
+        };
+
+        function askUsername() {
+            const prompt = document.getElementById("namePrompt");
+            prompt.style.display = "block";
+            setTimeout(() => {
+                document.getElementById("nameInput").focus();
+            }, 50);
+            document.getElementById("nameInput").addEventListener("keydown", function (e) {
+                if (e.key === "Enter") submitName();
+            });
+        }
+
+        function askMembername() {
+            const prompt = document.getElementById("memberNamePrompt");
+            prompt.style.display = "block";
+            setTimeout(() => {
+                document.getElementById("memberNameInput").focus();
+            }, 50);
+            document.getElementById("memberNameInput").addEventListener("keydown", function (e) {
+                if (e.key === "Enter") submitMemberName();
+            });
+        }
+
+        function submitName() {
+            const input = document.getElementById("nameInput").value.trim();
+            username = input || "Anonymous";
+            document.getElementById("namePrompt").style.display = "none";
+        }
+
+        function submitMemberName() {
+            const input = document.getElementById("memberNameInput").value.trim();
+            const name = input || "Anonymous";
+            document.getElementById("memberNamePrompt").style.display = "none";
+
+            const trimmedName = name.trim();
+            const lowerName = trimmedName.toLowerCase();
+            const leaderName = (data.clubLeader || "").trim().toLowerCase();
+
+            if (
+                lowerName === leaderName ||
+                memberArray.some(m => m.toLowerCase().startsWith(lowerName + " (")) ||
+                memberArray.some(m => m.toLowerCase() === lowerName)
+            ) {
+                showPopup("This member already exists or matches the leader.", null, true);
+                return;
+            }
+
+            memberArray.push(trimmedName);
+            updateMemberList();
+            saveMembersToStorage();
+        }
+
+
+        function addMember() {
+            askMembername()
+        }
+
+        function updateMemberList() {
+            const memberList = document.getElementById("memberList");
+            memberList.innerHTML = "";
+
+            if (memberArray.length === 0) {
+                memberList.textContent = "No members listed yet.";
+                return;
+            }
+
+            const ul = document.createElement("ul");
+            ul.style.paddingLeft = "20px";
+
+            const leaderName = (data.clubLeader || "").trim().toLowerCase();
+
+            memberArray.forEach((member, index) => {
+                const li = document.createElement("li");
+                li.style.color = "#eef";
+                li.style.fontSize = "17px";
+                li.style.display = "flex";
+                li.style.justifyContent = "space-between";
+                li.style.alignItems = "center";
+
+                const nameSpan = document.createElement("span");
+                const isLeader = member.trim().toLowerCase() === leaderName;
+                nameSpan.textContent = isLeader ? `${member} (Leader)` : member;
+
+                const removeBtn = document.createElement("button");
+                removeBtn.textContent = "–";
+                removeBtn.style.marginLeft = "100px";
+                removeBtn.style.padding = "2px 10px";
+                removeBtn.style.border = "none";
+                removeBtn.style.borderRadius = "8px";
+                removeBtn.style.background = "#ff4444";
+                removeBtn.style.color = "white";
+                removeBtn.style.cursor = "pointer";
+                removeBtn.style.fontSize = "16px";
+
+                removeBtn.onclick = () => {
+                    if (isLeader) {
+                        showPopup("You cannot remove the Club Leader.", null, true);
+                        return;
+                    }
+                    showPopup(`Remove "${member}"?`, (confirmed) => {
+                        if (confirmed) {
+                            memberArray.splice(index, 1);
+                            updateMemberList();
+                            saveMembersToStorage();
+                        }
+                    });
+                };
+
+                li.appendChild(nameSpan);
+                li.appendChild(removeBtn);
+                ul.appendChild(li);
+            });
+
+            memberList.appendChild(ul);
+        }
+
+        function saveMembersToStorage() {
+            if (!data) return;
+            data.members = memberArray.join(", ");
+            localStorage.setItem("preview_data_Club", JSON.stringify(data));
+        }
+
+        function showSection(id) {
+            document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+            document.getElementById(id).classList.add("active");
+            document.querySelectorAll("aside button").forEach(btn => btn.classList.remove("active"));
+            event.target.classList.add("active");
+        }
+
+        function sendMessage() {
+            const input = document.getElementById("chatInput");
+            const chatBox = document.getElementById("chatBox");
+            const msg = input.value.trim();
+
+            // Ensure a name has been entered
+            if (!username || username.trim() === "") {
+                askUsername()
+                return;
+            }
+
+            if (!msg) return;
+
+            const wrapper = document.createElement("div");
+            wrapper.style.margin = "10px 0";
+
+            const name = document.createElement("div");
+            name.textContent = username || "Anonymous";  // fallback
+            name.style.fontSize = "12px";
+            name.style.opacity = "0.6";
+            name.style.marginBottom = "3px";
+
+            const bubble = document.createElement("div");
+            bubble.textContent = msg;
+            bubble.style.padding = "10px";
+            bubble.style.borderRadius = "10px";
+            bubble.style.maxWidth = "70%";
+            bubble.style.display = "inline-block";
+            bubble.style.color = "#fff";
+
+            if (username.toLowerCase() === "you") {
+                bubble.style.background = "#00bcd4";
+                bubble.style.alignSelf = "flex-end";
+                wrapper.style.textAlign = "right";
+            } else {
+                bubble.style.background = "#ffffff22";
+                wrapper.style.textAlign = "left";
+            }
+
+            wrapper.appendChild(name);
+            wrapper.appendChild(bubble);
+            chatBox.appendChild(wrapper);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            input.value = "";
+        }
+
+
+        function showPopup(message, callback = null, alertOnly = false) {
+            document.getElementById("popup-message").textContent = message;
+            document.getElementById("popup").style.display = "block";
+            popupCallback = callback;
+            isAlert = alertOnly;
+
+            document.getElementById("popup-confirm-buttons").style.display = alertOnly ? "none" : "block";
+            document.getElementById("popup-alert-button").style.display = alertOnly ? "block" : "none";
+        }
+
+        function closePopup(result) {
+            document.getElementById("popup").style.display = "none";
+            if (popupCallback) {
+                popupCallback(result);
+            }
+        }
+    </script>
+
+    <div id="popup" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        color: #fff;
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        display: none;
+        z-index: 9999;
+        min-width: 280px;
+        max-width: 90%;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+        animation: popFadeIn 0.3s ease-out;
+        ">
+        <p id="popup-message" style="margin-bottom: 25px; font-size: 18px;">Popup Message</p>
+
+        <div id="popup-confirm-buttons">
+            <button onclick="closePopup(true)" style="
+                    margin-right: 10px;
+                    padding: 10px 24px;
+                    background: #00c6ff;
+                    color: #000;
+                    border: none;
+                    border-radius: 12px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+                ">Yes</button>
+
+            <button onclick="closePopup(false)" style="
+                    padding: 10px 24px;
+                    background: #ff4444;
+                    color: white;
+                    border: none;
+                    border-radius: 12px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 0 12px rgba(255, 70, 70, 0.6);
+                ">No</button>
+        </div>
+
+        <div id="popup-alert-button">
+            <button onclick="closePopup(true)" style="
+                    padding: 10px 24px;
+                    background: #00c6ff;
+                    color: #000;
+                    border: none;
+                    border-radius: 12px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+                ">OK</button>
+        </div>
+    </div>
+    <div id="namePrompt" style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    display: none;
+    z-index: 9999;
+    min-width: 300px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    animation: popFadeIn 0.3s ease-out;
+    ">
+        <p style="font-size: 18px; margin-bottom: 15px;">Enter your name to join the chat:</p>
+        <input type="text" id="nameInput" placeholder="Your name" style="
+            padding: 10px;
+            width: 80%;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            margin-bottom: 15px;
+        ">
+        <br>
+        <button onclick="submitName()" style="
+            padding: 10px 24px;
+            background: #00c6ff;
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+        ">Join</button>
+    </div>
+    <div id="memberNamePrompt" style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    display: none;
+    z-index: 9998;
+    min-width: 300px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    animation: popFadeIn 0.3s ease-out;
+    ">
+        <p style="font-size: 18px; margin-bottom: 15px;">Enter member name:</p>
+        <input type="text" id="memberNameInput" placeholder="Member name" style="
+            padding: 10px;
+            width: 80%;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            margin-bottom: 15px;
+        ">
+        <br>
+        <button onclick="submitMemberName()" style="
+            padding: 10px 24px;
+            background: #00c6ff;
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+        ">Add</button>
+    </div>
+</body>
+
+</html>
